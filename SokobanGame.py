@@ -44,14 +44,15 @@ LEVELS = [
 
 class SokobanGame:
     def __init__(self):
-        self.screen = pygame.display.set_mode((800, 600), RESIZABLE)
+        self.screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+        self.fullscreen = True
         pygame.display.set_caption("SokobanGame - Stage 1")
         self.clock = pygame.time.Clock()
         self.current_level = 0
         self.init_game()
         self.win_time = 0
         self.fail_time = 0
-        self.fullscreen = False
+        
         self.last_state = None
         self.final_victory = False  # 新增最终胜利状态
 
@@ -262,6 +263,9 @@ class SokobanGame:
                     self.move_player(1, 0)
                 elif event.key == K_f:
                     self.toggle_fullscreen()
+                elif event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
 
             if event.type == VIDEORESIZE:
                 self.screen = pygame.display.set_mode(
